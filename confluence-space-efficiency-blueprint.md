@@ -1,330 +1,304 @@
-# Confluence Space Efficiency Blueprint
+# Confluence Space Blueprint: Meetings, Financial Close, Projects, Knowledge Base
 
-## Goal and Operating Principles
-This blueprint is designed for a single team space that must support:
-- Standard recurring team meetings
-- Weekly 1:1s
-- Monthly financial close status tracking
-- SOPs and work instructions
-- Project management and execution
-
-Design principles:
-1. **One-click entry points** from the homepage
-2. **Structured content types** (templates + labels + page properties)
-3. **Predictable archive strategy** for old meetings/projects
-4. **Dashboard-driven status visibility** over manual browsing
-5. **Minimal clicks to update recurring processes**
+## Space Vision
+Create a **single Confluence command center** where teams can:
+- Run recurring meetings with consistent notes and follow-through.
+- Manage monthly/quarterly close activities with clear ownership and status.
+- Execute projects with transparent milestones, risks, and decisions.
+- Build a searchable, trusted knowledge base of SOPs and work instructions.
 
 ---
 
-## Page Tree Option 1: Operating Rhythm First (Best for leadership visibility)
-```
-Home
-├── 1) Team Rhythm
+## Recommended Space Architecture (Hub-and-Spoke)
+
+```text
+Home (Command Center)
+├── 1) Meetings Hub
 │   ├── Team Meetings
 │   │   ├── 2026
 │   │   │   ├── 2026-01-08 Team Meeting
 │   │   │   └── ...
 │   ├── 1:1 Meetings
-│   │   ├── Manager A
-│   │   │   ├── Employee A
+│   │   ├── Manager Name
+│   │   │   ├── Employee Name
 │   │   │   │   ├── 2026-01-09 1:1
 │   │   │   │   └── ...
-│   └── Monthly Financial Close
-│       ├── FY26
-│       │   ├── 2026-01 Close
-│       │   └── ...
-├── 2) SOPs & Work Instructions
-│   ├── Finance SOPs
-│   ├── Operational SOPs
-│   ├── Work Instructions by System
-│   └── Policy and Controls
-├── 3) Projects
-│   ├── Active Projects
-│   ├── Intake & Prioritization
-│   └── Completed Projects
-└── 4) Reporting & Dashboards
-    ├── KPI Dashboard
-    ├── Risks & Issues Register
-    └── Decision Log
-```
-
-**How to use:**
-- Best when your team cadence is the center of operations.
-- Homepage highlights links to Team Rhythm + current month close + active projects.
-- Monthly close pages include checklist, blockers, and sign-off.
-
-**Best macros/tools:**
-- `Page Properties` + `Page Properties Report` for meeting action tracking and close status rollups.
-- `Task Report` for open action items from meeting pages.
-- `Status` macro for Red/Amber/Green close and project states.
-- `Children Display` for year/month navigation.
-- `Roadmap Planner` (or Jira Roadmap integration) for projects.
-
----
-
-## Page Tree Option 2: Process First (Best for SOP-heavy environments)
-```
-Home
-├── 1) Core Processes
-│   ├── Financial Close
-│   │   ├── Process Overview
-│   │   ├── Monthly Runs
-│   │   └── Metrics & SLAs
-│   ├── Team Meeting Process
-│   └── 1:1 Process
-├── 2) SOP Library
-│   ├── By Function
-│   ├── By System
-│   ├── By Role
-│   └── Retired SOPs (Archive)
-├── 3) Work Execution
-│   ├── Action Tracker
-│   ├── Projects Portfolio
-│   └── Risks, Dependencies, Decisions
-└── 4) Governance
-    ├── RACI
-    ├── Audit Evidence
-    └── Controls Testing
-```
-
-**How to use:**
-- Each process owns its own SOPs, templates, metrics, and evidence pages.
-- Team members start from process pages, not organization pages.
-- Strong fit for controlled environments and audit readiness.
-
-**Best macros/tools:**
-- `Excerpt` + `Excerpt Include` to reuse standardized process snippets.
-- `Expand` for long SOP sections (keep pages scannable).
-- `Panel` for warnings, prerequisites, and control points.
-- `Content by Label` for dynamic SOP indexes.
-- `Attachments` + naming standards for audit evidence packs.
-
----
-
-## Page Tree Option 3: Portfolio + Delivery First (Best for project-heavy teams)
-```
-Home
-├── 1) Portfolio Overview
-│   ├── Strategic Initiatives
-│   ├── BAU Improvements
-│   └── Intake Backlog
-├── 2) Project Workspaces
-│   ├── Project Alpha
-│   │   ├── Charter
-│   │   ├── Plan & Timeline
-│   │   ├── RAID Log
-│   │   └── Meeting Notes
-│   └── Project Beta
-├── 3) Team Operations
-│   ├── Team Meetings
-│   ├── 1:1s
-│   └── Operating Metrics
-└── 4) Knowledge Base
-    ├── SOPs
-    ├── Work Instructions
-    └── Lessons Learned
-```
-
-**How to use:**
-- Projects are first-class citizens with consistent project workspace templates.
-- All recurring meetings still preserved in Team Operations.
-- Lessons learned feed back into SOP improvements.
-
-**Best macros/tools:**
-- Jira Issue/Filter macros embedded in each project workspace.
-- `Decision` macro for architectural and process decisions.
-- `Page Tree` macro inside each project root page.
-- `Status` and `Date` macros for milestone health.
-- Whiteboards for planning and retrospectives.
-
----
-
-## Page Tree Option 4: Role-Based Navigation (Best for cross-functional adoption)
-```
-Home
-├── 1) For Managers
-│   ├── Team Meeting Hub
-│   ├── 1:1 Hub
-│   └── People Action Tracker
-├── 2) For Finance Team
-│   ├── Monthly Close Hub
-│   ├── Reconciliation SOPs
-│   └── Reporting Calendar
-├── 3) For Individual Contributors
-│   ├── Work Instructions
-│   ├── Daily/Weekly Checklists
-│   └── Training & Onboarding
-├── 4) For PM/Project Leads
+│   └── Meeting Action Register
+├── 2) Financial Close Management Hub
+│   ├── Close Calendar
+│   ├── Monthly Close Runs
+│   │   ├── FY26
+│   │   │   ├── 2026-01 Close
+│   │   │   └── ...
+│   ├── Reconciliation Tracker
+│   ├── Close Issues & Blockers
+│   └── Sign-off & Audit Evidence
+├── 3) Projects Hub
 │   ├── Portfolio Dashboard
-│   ├── Project Templates
-│   └── RAID & Decision Registers
-└── 5) Shared Knowledge
-    ├── Policies
-    ├── Glossary
-    └── FAQ
-```
-
-**How to use:**
-- Homepage has role cards; users enter through “their lane.”
-- Reduces confusion in large teams with mixed responsibilities.
-- Governance pages under Shared Knowledge to maintain one source of truth.
-
-**Best macros/tools:**
-- `Livesearch` for role-specific findability.
-- `Navitabs`-style app (if marketplace allowed) for hub pages.
-- `Info`, `Note`, and `Warning` panels for role guidance.
-- `Recently Updated` macro for role hubs.
-
----
-
-## Page Tree Option 5: Hybrid Hub-and-Spoke (Best all-around recommendation)
-```
-Home (Command Center)
-├── Hubs
-│   ├── Meetings Hub
-│   │   ├── Team Meetings
-│   │   └── 1:1 Meetings
-│   ├── Financial Close Hub
-│   │   ├── Close Calendar
-│   │   ├── Monthly Close Runs
-│   │   └── Close Issues Log
-│   ├── SOP & WI Hub
-│   │   ├── SOP Index
-│   │   ├── Work Instructions Index
-│   │   └── Change Log
-│   └── Projects Hub
-│       ├── Portfolio Dashboard
-│       ├── Active Projects
-│       └── Project Archive
-├── Shared Registers
-│   ├── Action Register
-│   ├── RAID Register
-│   └── Decision Register
-└── Archive
+│   ├── Active Projects
+│   │   ├── Project Name
+│   │   │   ├── Charter
+│   │   │   ├── Plan & Timeline
+│   │   │   ├── RAID Log
+│   │   │   └── Project Meetings
+│   └── Completed Projects
+├── 4) Knowledge Base Hub
+│   ├── SOP Library
+│   ├── Work Instructions
+│   ├── Policies & Controls
+│   ├── FAQ
+│   └── Glossary
+└── 5) Archive
     ├── Meetings Archive
     ├── Close Archive
-    ├── SOP Archive
-    └── Project Archive
+    ├── Projects Archive
+    └── Knowledge Archive
 ```
 
-**How to use:**
-- Home is a command center with KPIs, upcoming deadlines, and “create new” buttons.
-- Hubs are functional entry points; registers provide cross-cutting visibility.
-- Archive is explicit, preventing active areas from becoming cluttered.
+---
 
-**Best macros/tools:**
-- `Page Properties Report` on each hub for standardized rollups.
-- `Task Report` filtered by labels (e.g., `team-meeting`, `close`, `project`).
-- `Content by Label` for dynamic indexes.
-- `Create from Template` buttons on hub pages.
-- Jira integration for portfolio/project status.
+## Home Page (Command Center) Layout
+
+Build the homepage in sections so users can scan and act in under 30 seconds.
+
+### Section A: Hero + Quick Actions
+Use:
+- **Panel macro** (Info style) for purpose and ownership.
+- **Create from Template buttons** for:
+  - New Team Meeting Note
+  - New 1:1 Note
+  - New Close Run
+  - New Project Workspace
+  - New SOP
+
+### Section B: Health Snapshot
+Use:
+- **Status macros** for:
+  - Close status (Green/Amber/Red)
+  - Portfolio health
+  - Open blockers count
+- **Page Properties Report macro** to roll up active close runs and active projects.
+
+### Section C: What needs attention
+Use:
+- **Task Report macro** filtered by labels (`meeting-action`, `close-task`, `project-action`).
+- **Recently Updated macro** for last 7 days across key hubs.
+- **Content by Label macro** for urgent content (`blocker`, `needs-decision`).
+
+### Section D: Navigation tiles
+Use either table cards or panels to link to:
+- Meetings Hub
+- Financial Close Management Hub
+- Projects Hub
+- Knowledge Base Hub
+- Archive
 
 ---
 
-## Recommended Macro and Tool Stack (for visual clarity + usability)
-Use these across all page tree options:
+## Hub Design and Macro Standards
 
-1. **Navigation and discovery**
-   - `Children Display`, `Page Tree`, `Content by Label`, `Livesearch`
-2. **Status and action tracking**
-   - `Status`, `Task List`, `Task Report`, `Date`, `Decision`
-3. **Structured reporting**
-   - `Page Properties`, `Page Properties Report`
-4. **Readable SOP formatting**
-   - `Panel`, `Expand`, `Excerpt`, `Excerpt Include`, `Table of Contents`
-5. **Project execution**
-   - Jira Issue/Filter macros, Roadmap macro (native/app), Whiteboards
-6. **Automation add-ons (if allowed)**
-   - Comala Document Management (approvals)
-   - Scroll Documents / Scroll PDF Exporter (publishing)
-   - Automation for Confluence (auto-labeling, reminders)
+## 1) Meetings Hub
 
----
+### Purpose
+Centralize all recurring meeting cadences and ensure actions are not lost.
 
-## What content each major page should contain
+### Required macros
+- **Children Display** for year/month note navigation.
+- **Task Report** for all open meeting actions.
+- **Page Properties Report** for meeting rollups by facilitator/date/status.
+- **Decision macro** for key outcomes.
 
-### Home (Command Center)
-- Space purpose + ownership
-- Quick links: Meetings, 1:1s, Monthly Close, SOPs, Projects
-- “Create New” buttons from templates
-- KPI snapshot + current close status
-- Overdue actions widget (Task Report)
+### Labels to enforce
+- `meeting`
+- `team-meeting` or `one-on-one`
+- `meeting-action`
 
-### Team Meeting page template output
-- Objective and attendees
-- Agenda table
-- Notes by agenda item
-- Action items with owner and due date
-- Decision log snippet
-- Page Properties block (meeting date, facilitator, status)
-
-### 1:1 page template output
-- Private/shared expectations section
-- Progress since last 1:1
-- Current priorities and blockers
-- Development/coaching notes
-- Action commitments before next 1:1
-
-### Monthly Financial Close page template output
-- Month-end timeline and milestones
-- Checklist by process stream
-- Owner matrix (RACI-lite)
-- Issue/blocker log with severity and aging
-- Sign-off section and retrospective notes
-
-### SOP/Work Instruction page template output
-- Purpose, scope, owner
-- Preconditions and inputs
-- Step-by-step instructions (with screenshots)
-- Exception handling
-- Control/audit notes
-- Revision history
-
-### Project workspace root page output
-- Project charter summary
-- Scope / out-of-scope
-- Milestone timeline + dependencies
-- RAID section
-- Linked Jira board/filter
-- Weekly status summary and decisions
+### Meeting note template (recommended)
+Sections:
+1. Objective
+2. Attendees
+3. Agenda
+4. Notes
+5. Action items (tasks with owners and due dates)
+6. Decisions
+7. Page Properties block:
+   - Meeting Date
+   - Meeting Type
+   - Facilitator
+   - Follow-up Status
 
 ---
 
-## Templates to create (high-value starter set)
-1. Team Meeting Notes
-2. Weekly 1:1 Notes
-3. Monthly Close Runbook
-4. Close Issue Log Entry
-5. SOP Template
-6. Work Instruction Template
-7. Project Charter
-8. Project Weekly Status Report
-9. RAID Log Entry
-10. Decision Record
-11. Action Log Entry
-12. Retrospective / Lessons Learned
-13. Onboarding Checklist
-14. Process Change Request
-15. Audit Evidence Record
+## 2) Financial Close Management Hub
 
-Template standards:
-- Mandatory metadata block (Owner, Date, Status, Process, Labels)
-- Consistent label taxonomy (e.g., `meeting-note`, `one-on-one`, `close-cycle`, `sop`, `project`)
-- Pre-inserted Page Properties for rollups
-- “Related links” section at bottom
+### Purpose
+Provide structured oversight of close execution, dependencies, and sign-off.
+
+### Required macros
+- **Page Properties + Page Properties Report** to roll up each close run.
+- **Status macro** for phase health (Pre-close, Day 1, Reconciliation, Review, Sign-off).
+- **Date macro** for due dates and milestones.
+- **Task Report** for overdue close tasks.
+- **Attachments macro** in Sign-off pages for audit evidence packs.
+
+### Labels to enforce
+- `financial-close`
+- `close-run`
+- `close-task`
+- `reconciliation`
+- `close-blocker`
+
+### Monthly close run template
+Sections:
+1. Period and owner
+2. Close checklist by phase
+3. Critical dependencies
+4. Blockers and escalations
+5. Reconciliation status
+6. Sign-off checklist
+7. Evidence links
+8. Page Properties block:
+   - Close Period
+   - Close Manager
+   - Current Phase
+   - RAG Status
+   - Target Sign-off Date
 
 ---
 
-## Implementation sequence (recommended 30-day rollout)
-1. Build Home + Hub pages + template set
-2. Configure labels and Page Properties standards
-3. Migrate current SOPs and top 3 recurring meetings
-4. Stand up Monthly Close hub + first close cycle page
-5. Launch project workspace template and pilot on one project
-6. Add archive rules and quarterly housekeeping routine
+## 3) Projects Hub
+
+### Purpose
+Run projects consistently while keeping portfolio visibility for leadership.
+
+### Required macros
+- **Page Tree macro** inside each project root page.
+- **Status macro** for schedule/scope/budget health.
+- **Decision macro** for governance decisions.
+- **Jira Issue/Filter macros** for sprint and delivery tracking (if Jira is used).
+- **Roadmap macro** (native/app) for milestone timeline.
+
+### Labels to enforce
+- `project`
+- `active-project`
+- `raid`
+- `project-decision`
+
+### Project workspace template
+Pages:
+- Charter
+- Plan & Timeline
+- RAID Log
+- Stakeholder Communications
+- Project Meetings
+- Lessons Learned
+
+Each root project page includes **Page Properties**:
+- Project Owner
+- Stage
+- RAG Status
+- Target End Date
+- Strategic Priority
 
 ---
 
-## Final recommendation
-Choose **Option 5 (Hybrid Hub-and-Spoke)** for most teams because it balances recurring operations (meetings, 1:1s, close), structured knowledge (SOP/WI), and project execution while staying intuitive for new users.
+## 4) Knowledge Base Hub
+
+### Purpose
+Create a trusted source of SOPs, work instructions, and operational knowledge.
+
+### Required macros
+- **Table of Contents** for long SOP pages.
+- **Expand** for detailed steps and edge-case handling.
+- **Excerpt + Excerpt Include** for reusable standard text.
+- **Content by Label** for dynamic indexes (SOPs by function/system).
+- **Livesearch** for quick retrieval.
+
+### Labels to enforce
+- `sop`
+- `work-instruction`
+- `policy`
+- `control`
+- `kb`
+
+### SOP template
+Sections:
+1. Purpose
+2. Scope
+3. Prerequisites
+4. Procedure steps
+5. Controls and exceptions
+6. Related links
+7. Change history
+8. Page Properties block:
+   - Document Owner
+   - Effective Date
+   - Review Date
+   - Version
+   - Approval Status
+
+---
+
+## Space-Wide Governance Rules
+
+### Naming conventions
+- Meeting page: `YYYY-MM-DD Team Meeting`
+- 1:1 page: `YYYY-MM-DD Manager-Employee 1:1`
+- Close page: `YYYY-MM Close`
+- Project root: `Project - <Name>`
+- SOP page: `SOP - <Process Name>`
+
+### Archiving policy
+- Meetings: move notes older than 12 months to Meetings Archive.
+- Close runs: archive by fiscal year after annual audit completion.
+- Projects: move completed projects 60 days after close-out.
+- SOPs: move retired docs to Knowledge Archive with `retired` label.
+
+### Access model
+- Open read access for most team members.
+- Restricted edit rights for controlled content (policies/sign-off pages).
+- Use page restrictions only where compliance requires it.
+
+---
+
+## High-Productivity Macro Pack (install/use first)
+
+1. **Page Properties** + **Page Properties Report** (structured rollups)
+2. **Task Report** (global follow-up visibility)
+3. **Status** + **Date** (health and timelines)
+4. **Children Display** + **Page Tree** (clean navigation)
+5. **Content by Label** + **Livesearch** (findability)
+6. **Decision** (traceable governance)
+7. **Panel**, **Expand**, **Table of Contents** (readability)
+8. **Create from Template** (fast, standardized page creation)
+
+---
+
+## Implementation Plan (first 2 weeks)
+
+### Week 1
+- Create page tree skeleton and hub pages.
+- Build and publish 5 templates:
+  - Team Meeting
+  - 1:1
+  - Monthly Close Run
+  - Project Workspace
+  - SOP
+- Add required labels and sample pages in each hub.
+
+### Week 2
+- Configure Page Properties Reports on Home + all hubs.
+- Migrate existing key content into correct hubs.
+- Add archive pages and update ownership metadata.
+- Run team onboarding session (30 minutes) and publish usage guide.
+
+---
+
+## Definition of Done for Space Launch
+
+The space is considered production-ready when:
+- Home page shows real-time status rollups for meetings, close, and projects.
+- All four hubs have templates, labels, and dashboard macros active.
+- Task Report exposes open actions across all operational areas.
+- Knowledge Base content is searchable by label and Livesearch.
+- Archive strategy is documented and implemented.
